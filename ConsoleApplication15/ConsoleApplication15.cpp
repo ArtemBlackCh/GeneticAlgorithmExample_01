@@ -3,17 +3,19 @@
 #include <random>
 #include <Vector>
 #include <List>
-#include <conio.h>
+#include <iomanip>
 
 using namespace std;
 
-double Funktion(double x, double y)
+double Funсtion(double x, double y)
 {
     //double z = pow(sin(x), 3) + pow(cos(y), 1 / 3);
 
     //double z = -pow(x, 2) - pow(y, 2) + 5;
 
     double z = sin(x) * cos(y);
+
+    //double z = 5 - abs(x) - abs(y);
 
     return z;
 }
@@ -56,7 +58,6 @@ double DoubleRandom(double min, double max)
     return b;
 }
 
-
 class Object {
 public : 
     
@@ -68,14 +69,14 @@ public :
     {
         _x = DoubleRandom(-10, 10);
         _y = DoubleRandom(-10, 10);
-        _z = Funktion(_x,_y);
+        _z = Funсtion(_x,_y);
     }
 
     void SetObject(double x, double y)
     {
         _x = x;
         _y = y;
-        _z = Funktion(x, y); 
+        _z = Funсtion(x, y);
     }
 };
 
@@ -177,6 +178,7 @@ int main()
     cin >> step;
     cout << "\n";
 
+    string progress_bar = "";
     for (int t = 0; t < num_of_generations; t++)
     {
 
@@ -184,10 +186,28 @@ int main()
 
         population = Sort(population);
 
-        if(t % step == step - 1 )
+        int progressBarLenght = 17;
+        
+
+        if (t % step == step - 1 || t + 1 == num_of_generations)
         { 
             system("cls");
-            cout << (t + 1) * 100 / num_of_generations << "%\n";
+            /*int progress = ((t + 1) * 100) / num_of_generations;
+
+            progress_bar = "";
+            for (int i = 0; i < progress / (100 / progressBarLenght) ; i++)
+            {
+                progress_bar += '#';
+            }*/
+
+            double progress = (t + 1.0) / num_of_generations;
+            int fillAmount = progress * progressBarLenght;
+            progress_bar = string(fillAmount, '#') + string(progressBarLenght - fillAmount, '.');
+
+            //cout << setw(progressBarLenght) << setfill('_') << left << progress_bar;
+            //cout << " " << progress * 100 << "%\n";
+            cout << progress_bar << " " << progress * 100 << "%\n";
+
             cout << "--- popoulation " << t + 1 << " --- " <<"\n";
             for (int p = 0; p < 10; p++)
             {
