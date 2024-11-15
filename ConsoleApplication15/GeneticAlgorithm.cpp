@@ -1,9 +1,12 @@
 #include <math.h>
 #include <iostream>
 #include <algorithm>
+#include <iomanip>
 #include "GeneticAlgorithm.h"
 #define MUTATION_PROBABILITY 40
-#define INACCURACY 10e-5
+#define INACCURACY 10e-7
+
+bool CompareEntities(GeneticEntity entityA, GeneticEntity entityB);
 
 void GeneticAlgorithm::Assess(GeneticEntity& entity)
 {
@@ -33,8 +36,17 @@ void GeneticAlgorithm::RunFor(int generationNumber)
 
 void GeneticAlgorithm::RunUntil(double epsilon)
 {
-	while (abs(_population[0].GetResult() - epsilon) > INACCURACY);
+	int curentDepth = 0;
+
+	while (_population[0].GetResult() < (epsilon - INACCURACY))
 	{
+		if (curentDepth >= _maxDepth)
+		{
+			break;
+		}
+		
+		curentDepth++;
+
 		NextGeneration();
 	}
 }
@@ -95,11 +107,11 @@ void GeneticAlgorithm::Display()
 
 	for (GeneticEntity x : _population)
 	{
-		cout << x.GetX() << x.GetY() << x.GetResult()<<endl;
+		cout << setw(10) <<x.GetX() << setw(10) << x.GetY() << setw(10) << x.GetResult() << endl;
 	}
 }
 
-bool GeneticAlgorithm::CompareEntities(GeneticEntity entityA, GeneticEntity entityB)
+bool CompareEntities(GeneticEntity entityA, GeneticEntity entityB)
 {
-	return entityA.GetResult() < entityB.GetResult();
+	return entityA.GetResult() > entityB.GetResult();
 }

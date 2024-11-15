@@ -9,6 +9,7 @@ class GeneticAlgorithm
 private:
 	int _functionType = 1;
 	int _generationCount = 0;
+	int _maxDepth = 10000;
 
 	vector<GeneticEntity> _population;
 
@@ -16,6 +17,8 @@ private:
 	double ComparatorFunction(GeneticEntity entity);
 
 public:
+	inline void SetMaxDepth(int value) { _maxDepth = value; }
+
 	/// <param name="FunctionType"> 
 	/// <para> Sets genetic function to... </para>
 	/// <para> 1 - sin </para>
@@ -32,7 +35,5 @@ public:
 	void NextGeneration();
 	void Mix();
 	void Display();
-
-	bool CompareEntities(GeneticEntity entityA, GeneticEntity entityB);
 };
 
