@@ -12,6 +12,7 @@ public:
 	inline double GetX() { return _x; }
 	inline double GetY() { return _y; }
 	inline double GetResult() { return _result; }
+	inline void SetResult(double value) { _result = value; }
 
 	GeneticEntity()
 	{
@@ -35,7 +36,5 @@ public:
 	}
 
 	void Mutate(double probability);
-
-	void SetResult(double value);
 };
 

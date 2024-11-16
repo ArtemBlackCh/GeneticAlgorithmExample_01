@@ -15,8 +15,3 @@ void GeneticEntity::Mutate(double probability)
 		_y += _y * Random::GetDouble(MUTATION_OFFSET - MUTATION_SHIFT, MUTATION_OFFSET + MUTATION_SHIFT);
 	}
 }
-
-void GeneticEntity::SetResult(double value)
-{
-	_result = value;
-}

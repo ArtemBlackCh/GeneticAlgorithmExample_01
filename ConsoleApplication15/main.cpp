@@ -13,9 +13,9 @@ int main()
 	cout << fixed;
 	cout << setprecision(5);
 
-	GeneticAlgorithm algorithm = GeneticAlgorithm(3,10);
+	GeneticAlgorithm algorithm = GeneticAlgorithm(1,10);
 
-	algorithm.RunFor(500);
+	algorithm.RunFor(200);
 
 	//algorithm.RunUntil(1);
 }
