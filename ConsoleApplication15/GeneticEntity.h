@@ -9,9 +9,9 @@ private:
 	double _result = 0;
 	
 public:
-	double GetX();
-	double GetY();
-	double GetResult();
+	inline double GetX() { return _x; }
+	inline double GetY() { return _y; }
+	inline double GetResult() { return _result; }
 
 	GeneticEntity()
 	{

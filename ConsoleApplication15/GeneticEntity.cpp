@@ -3,21 +3,6 @@
 #define MUTATION_OFFSET 0
 #define MUTATION_SHIFT 0.5
 
-double GeneticEntity::GetX()
-{
-	return _x;
-}
-
-double GeneticEntity::GetY()
-{
-	return _y;
-}
-
-double GeneticEntity::GetResult()
-{
-	return _result;
-}
-
 void GeneticEntity::Mutate(double probability)
 {
 	if (Random::Probability(probability))

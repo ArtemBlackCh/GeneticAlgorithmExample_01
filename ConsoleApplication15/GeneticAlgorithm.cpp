@@ -4,7 +4,7 @@
 #include <iomanip>
 #include "GeneticAlgorithm.h"
 #define MUTATION_PROBABILITY 40
-#define INACCURACY 10e-7
+#define INACCURACY 10e-6
 
 bool CompareEntities(GeneticEntity entityA, GeneticEntity entityB);
 
@@ -20,7 +20,9 @@ double GeneticAlgorithm::ComparatorFunction(GeneticEntity entity)
 		case 1 :
 			return sin(entity.GetX()) * cos(entity.GetY());
 		case 2 :
-			return 0;
+			return -1 * abs((entity.GetX() - 1) * cos(entity.GetY())) - 1 * abs((entity.GetY() + 1) * cos(entity.GetX()));
+		case 3:
+			return sin(entity.GetX() + sqrt(2) * 0.5) + cos(entity.GetX() + sqrt(2) * 0.5) + sin(entity.GetY() + 0.5) + cos(entity.GetY() + sqrt(3) * 0.5);
 		default :
 			return 0;
 	}
