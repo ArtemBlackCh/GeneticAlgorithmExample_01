@@ -1,5 +1,6 @@
 #include <math.h>
 #include <iostream>
+#include <Windows.h>
 #include <algorithm>
 #include <iomanip>
 #include "GeneticAlgorithm.h"
@@ -32,8 +33,11 @@ void GeneticAlgorithm::RunFor(int generationNumber)
 {
 	for (int i = 0; i < generationNumber; i++)
 	{
+		cout << "progress : " << setw(5) << (100 * i) / generationNumber << "%" << endl;
 		NextGeneration();
 	}
+
+	cout << "progress : " << setw(5) << 100 << "%" << endl;
 }
 
 void GeneticAlgorithm::RunUntil(double epsilon)
@@ -48,6 +52,8 @@ void GeneticAlgorithm::RunUntil(double epsilon)
 		}
 		
 		curentDepth++;
+
+		cout << "progress : error = " << epsilon - _population[0].GetResult();
 
 		NextGeneration();
 	}
@@ -85,7 +91,7 @@ void GeneticAlgorithm::Mix()
 
 		if (i != 0)
 		{
-			newPopulation[i].Mutate(MUTATION_PROBABILITY);
+			newPopulation[i].Mutate(_mutationProbability);
 		}
 
 		Assess(newPopulation[i]);
@@ -93,7 +99,7 @@ void GeneticAlgorithm::Mix()
 
 	for (int i = crossRatio.size(); i < _population.size(); i++)
 	{
-		newPopulation[i] = GeneticEntity(-10, 10, -10, 10);
+		newPopulation[i] = GeneticEntity(_minDoubleNum, _maxDoubleNum, _minDoubleNum, _maxDoubleNum);
 
 		Assess(newPopulation[i]);
 	}
@@ -109,8 +115,17 @@ void GeneticAlgorithm::Display()
 
 	for (GeneticEntity x : _population)
 	{
-		cout << setw(10) <<x.GetX() << setw(10) << x.GetY() << setw(10) << x.GetResult() << endl;
+		cout << setw(10) << x.GetX() << setw(10) << x.GetY();
+		SetConsoleColor(FOREGROUND_GREEN);
+		cout << setw(10) << x.GetResult() << endl;
+		SetConsoleColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 	}
+}
+
+void GeneticAlgorithm::SetConsoleColor(int color)
+{
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsole, color);
 }
 
 bool CompareEntities(GeneticEntity entityA, GeneticEntity entityB)

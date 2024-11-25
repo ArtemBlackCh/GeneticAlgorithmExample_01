@@ -13,10 +13,13 @@ int main()
 	cout << fixed;
 	cout << setprecision(5);
 
-	GeneticAlgorithm algorithm = GeneticAlgorithm(1,10);
+	GeneticAlgorithm algorithm = GeneticAlgorithm(1, 10, -20, 20);
 
-	algorithm.RunFor(200);
+	algorithm.RunFor(100);
 
-	//algorithm.RunUntil(1);
+	GeneticEntity bestEntity = algorithm.GetBestEntity();
+
+	cout << "Result : x = " << bestEntity.GetX() << " y = " << bestEntity.GetY() << " z = " << bestEntity.GetResult();
+
 }
 

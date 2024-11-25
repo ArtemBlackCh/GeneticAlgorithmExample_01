@@ -12,6 +12,9 @@ public:
 	inline double GetX() { return _x; }
 	inline double GetY() { return _y; }
 	inline double GetResult() { return _result; }
+
+	inline void SetX(double value) { _x = value; }
+	inline void SetY(double value) { _y = value; }
 	inline void SetResult(double value) { _result = value; }
 
 	GeneticEntity()
